@@ -6,22 +6,26 @@ export class App extends Component {
     name: '',
   };
 
-  getSubmitContact(e) {
+  handleSubmitContact = e => {
     e.preventDefault();
-    console.log(e.elements.value);
-  }
+    console.log(e.currentTarget.value);
+    this.state.contacts.push(this.state.name);
+    this.reset();
+  };
 
   handleNameChange = e => {
     this.setState({ name: e.currentTarget.value });
   };
 
-  addContact() {}
+  reset() {
+    this.setState({ name: '' });
+  }
 
   render() {
     return (
       <Container>
         <h1>Phonebook</h1>
-        <Form>
+        <Form onSubmit={this.handleSubmitContact}>
           <label>
             Name
             <input
@@ -34,14 +38,14 @@ export class App extends Component {
               required
             />
           </label>
-          <Button type="submit" onClick={() => this.getSubmitContact}>
-            Add contact
-          </Button>
+          <Button type="submit">Add contact</Button>
         </Form>
         <div>
           <h2>Contacts</h2>
           <ul>
-            <li></li>
+            {this.state.contacts.map(item => {
+              return <li>{item}</li>;
+            })}
           </ul>
         </div>
       </Container>
