@@ -1,24 +1,30 @@
 import { Component } from 'react';
-import { Form, Button, Container } from './App.styled';
+import { nanoid } from 'nanoid';
+import { Form, Button, Container, List } from './App.styled';
 export class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
 
   handleSubmitContact = e => {
     e.preventDefault();
-    console.log(e.currentTarget.value);
-    this.state.contacts.push(this.state.name);
+    const contactsItem = {
+      name: this.state.name,
+      id: nanoid(),
+      number: this.state.number,
+    };
+    this.state.contacts.push(contactsItem);
     this.reset();
   };
 
-  handleNameChange = e => {
-    this.setState({ name: e.currentTarget.value });
+  handleChange = e => {
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
 
   reset() {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   }
 
   render() {
@@ -30,7 +36,7 @@ export class App extends Component {
             Name
             <input
               type="text"
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
               value={this.state.name}
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -38,15 +44,30 @@ export class App extends Component {
               required
             />
           </label>
+          <label>
+            Number
+            <input
+              onChange={this.handleChange}
+              value={this.state.number}
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+            />
+          </label>
           <Button type="submit">Add contact</Button>
         </Form>
         <div>
           <h2>Contacts</h2>
-          <ul>
+          <List>
             {this.state.contacts.map(item => {
-              return <li>{item}</li>;
+              return (
+                <li key={item.id}>
+                  {item.name}: {item.number}
+                </li>
+              );
             })}
-          </ul>
+          </List>
         </div>
       </Container>
     );
