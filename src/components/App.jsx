@@ -11,6 +11,10 @@ export class App extends Component {
     console.log(e.elements.value);
   }
 
+  handleNameChange = e => {
+    this.setState({ name: e.currentTarget.value });
+  };
+
   addContact() {}
 
   render() {
@@ -22,6 +26,8 @@ export class App extends Component {
             Name
             <input
               type="text"
+              onChange={this.handleNameChange}
+              value={this.state.name}
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
