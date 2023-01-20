@@ -1,11 +1,12 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { Form, Button, Container, List } from './App.styled';
+import { Form, Button, Container, List, Input } from './App.styled';
 export class App extends Component {
   state = {
     contacts: [],
     name: '',
     number: '',
+    filter: '',
   };
 
   handleSubmitContact = e => {
@@ -27,6 +28,14 @@ export class App extends Component {
     this.setState({ name: '', number: '' });
   }
 
+  filterize() {
+    const filtered = this.state.contacts.filter(
+      item => item.toLowerCase() === this.state.filter.toLowerCase()
+    );
+    console.log(filtered);
+    return filtered;
+  }
+
   render() {
     return (
       <Container>
@@ -34,7 +43,7 @@ export class App extends Component {
         <Form onSubmit={this.handleSubmitContact}>
           <label>
             Name
-            <input
+            <Input
               type="text"
               onChange={this.handleChange}
               value={this.state.name}
@@ -46,7 +55,7 @@ export class App extends Component {
           </label>
           <label>
             Number
-            <input
+            <Input
               onChange={this.handleChange}
               value={this.state.number}
               name="number"
@@ -59,6 +68,15 @@ export class App extends Component {
         </Form>
         <div>
           <h2>Contacts</h2>
+          <label>
+            Find contacts dy name:
+            <Input
+              type="text"
+              value={this.state.filter}
+              name="filter"
+              onChange={this.handleChange}
+            />
+          </label>
           <List>
             {this.state.contacts.map(item => {
               return (
