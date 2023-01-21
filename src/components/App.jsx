@@ -16,13 +16,18 @@ export class App extends Component {
   };
 
   formSubmit = ({ name, number }) => {
-    this.setState(prevState =>
+    for (const cont of this.state.contacts) {
+      if (cont.name === name) {
+        alert(`${name} is already in contacts!`);
+      }
+    }
+    this.setState(prevState => {
       prevState.contacts.push({
         name,
         id: nanoid(),
         number,
-      })
-    );
+      });
+    });
   };
 
   onFilter = data => {
