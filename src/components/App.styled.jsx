@@ -14,9 +14,3 @@ export const Input = styled.input`
   margin: 5px auto;
   padding: 5px;
 `;
-
-export const List = styled.ul`
-  width: 250px;
-  padding: 0;
-  margin: 0 auto;
-`;

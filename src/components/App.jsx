@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { Container, List, Input } from './App.styled';
+import { Container } from './App.styled';
 import ContactForm from './ContactForm/ContactForm';
+import Filter from './Filter/Filter';
+import ContactList from './ContactList/ContactList';
 export class App extends Component {
   state = {
     contacts: [
@@ -10,61 +12,39 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-
     filter: '',
   };
 
-  FormSubmit = data => {
+  formSubmit = ({ name, number }) => {
     this.setState(prevState =>
       prevState.contacts.push({
-        name: data.name,
+        name,
         id: nanoid(),
-        number: data.number,
+        number,
       })
     );
   };
 
-  filterize() {
-    const filtered = this.state.contacts.filter(item =>
-      item.name.toLowerCase().includes(this.state.filter.toLowerCase())
-    );
-    console.log(filtered);
+  filterize = data => {
+    const { contacts, filter } = this.state;
+    this.setState({ filter: data });
+    const filtered = contacts.filter(({ name }) => name.includes(filter));
     return filtered;
-  }
+  };
 
   render() {
     return (
       <Container>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.FormSubmit} />
+        <ContactForm onSubmit={this.formSubmit} />
         <div>
           <h2>Contacts</h2>
-          <label>
-            Find contacts dy name:
-            <Input
-              type="text"
-              value={this.state.filter}
-              name="filter"
-              onChange={this.handleChange}
-            />
-          </label>
-          <List>
-            {this.state.filter === ''
-              ? this.state.contacts.map(item => {
-                  return (
-                    <li key={item.id}>
-                      {item.name}: {item.number}
-                    </li>
-                  );
-                })
-              : this.filterize().map(item => {
-                  return (
-                    <li key={item.id}>
-                      {item.name}:{item.number}
-                    </li>
-                  );
-                })}
-          </List>
+          <Filter onChange={this.filterize} />
+          <ContactList
+            filter={this.state.filter}
+            contacts={this.state.contacts}
+            filterize={this.filterize}
+          />
         </div>
       </Container>
     );
