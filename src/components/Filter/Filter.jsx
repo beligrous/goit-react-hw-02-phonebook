@@ -8,7 +8,7 @@ class Filter extends Component {
 
   handleChange = e => {
     this.setState({ filter: e.currentTarget.value });
-    this.props.onChange(this.state);
+    this.props.onChange(this.state.filter);
   };
 
   render() {

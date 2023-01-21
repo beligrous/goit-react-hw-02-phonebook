@@ -25,10 +25,15 @@ export class App extends Component {
     );
   };
 
-  filterize = data => {
-    const { contacts, filter } = this.state;
+  onFilter = data => {
     this.setState({ filter: data });
-    const filtered = contacts.filter(({ name }) => name.includes(filter));
+  };
+
+  filterize = () => {
+    const { filter, contacts } = this.state;
+    const filtered = contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
     return filtered;
   };
 
@@ -39,11 +44,11 @@ export class App extends Component {
         <ContactForm onSubmit={this.formSubmit} />
         <div>
           <h2>Contacts</h2>
-          <Filter onChange={this.filterize} />
+          <Filter onChange={this.onFilter} />
           <ContactList
             filter={this.state.filter}
             contacts={this.state.contacts}
-            filterize={this.filterize}
+            filterize={this.filterize()}
           />
         </div>
       </Container>
