@@ -3,7 +3,12 @@ import { nanoid } from 'nanoid';
 import { Form, Button, Container, List, Input } from './App.styled';
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     name: '',
     number: '',
     filter: '',
@@ -29,8 +34,8 @@ export class App extends Component {
   }
 
   filterize() {
-    const filtered = this.state.contacts.filter(
-      item => item.toLowerCase() === this.state.filter.toLowerCase()
+    const filtered = this.state.contacts.filter(item =>
+      item.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
     console.log(filtered);
     return filtered;
@@ -78,13 +83,21 @@ export class App extends Component {
             />
           </label>
           <List>
-            {this.state.contacts.map(item => {
-              return (
-                <li key={item.id}>
-                  {item.name}: {item.number}
-                </li>
-              );
-            })}
+            {this.state.filter === ''
+              ? this.state.contacts.map(item => {
+                  return (
+                    <li key={item.id}>
+                      {item.name}: {item.number}
+                    </li>
+                  );
+                })
+              : this.filterize().map(item => {
+                  return (
+                    <li key={item.id}>
+                      {item.name}:{item.number}
+                    </li>
+                  );
+                })}
           </List>
         </div>
       </Container>
