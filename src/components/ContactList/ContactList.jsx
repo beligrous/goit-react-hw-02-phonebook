@@ -18,20 +18,19 @@ function ContactList({ filter, contacts, findContacts, onClick }) {
               </ListItem>
             );
           })
-        : () =>
-            findContacts().map(item => {
-              return (
-                <ListItem key={item.id}>
-                  <span>
-                    {item.name}:{item.number}
-                  </span>
+        : findContacts().map(item => {
+            return (
+              <ListItem key={item.id}>
+                <span>
+                  {item.name}:{item.number}
+                </span>
 
-                  <Delete onClick={() => onClick(item.id)} type="button">
-                    Delete
-                  </Delete>
-                </ListItem>
-              );
-            })}
+                <Delete onClick={() => onClick(item.id)} type="button">
+                  Delete
+                </Delete>
+              </ListItem>
+            );
+          })}
     </List>
   );
 }

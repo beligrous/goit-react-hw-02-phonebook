@@ -37,8 +37,8 @@ export class App extends Component {
     }));
   };
 
-  onFilter = data => {
-    this.setState({ filter: data });
+  onFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
 
   findContacts = () => {
@@ -57,7 +57,7 @@ export class App extends Component {
         <ContactForm onSubmit={this.formSubmit} />
         <div>
           <h2>Contacts</h2>
-          <Filter onChange={this.onFilter} />
+          <Filter value={filter} onChange={this.onFilter} />
           <ContactList
             filter={filter}
             contacts={contacts}
