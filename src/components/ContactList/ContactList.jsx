@@ -1,20 +1,32 @@
-import { List } from './contact-list.styled';
+import React from 'react';
+import { List, Delete } from './contact-list.styled';
 
-function ContactList({ filter, contacts, filterize }) {
+function ContactList({ filter, contacts, filterize, onClick }) {
   return (
     <List>
       {filter === ''
         ? contacts.map(item => {
             return (
               <li key={item.id}>
-                {item.name}: {item.number}
+                <span>
+                  {item.name}: {item.number}
+                </span>
+                <Delete onClick={() => onClick(item.id)} type="button">
+                  Delete
+                </Delete>
               </li>
             );
           })
-        : filterize.map(item => {
+        : filterize().map(item => {
             return (
               <li key={item.id}>
-                {item.name}:{item.number}
+                <span>
+                  {item.name}:{item.number}
+                </span>
+
+                <Delete onClick={() => onClick(item.id)} type="button">
+                  Delete
+                </Delete>
               </li>
             );
           })}

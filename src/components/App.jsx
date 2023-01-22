@@ -16,11 +16,6 @@ export class App extends Component {
   };
 
   formSubmit = ({ name, number }) => {
-    for (const cont of this.state.contacts) {
-      if (cont.name === name) {
-        alert(`${name} is already in contacts!`);
-      }
-    }
     this.setState(prevState => {
       prevState.contacts.push({
         name,
@@ -28,6 +23,12 @@ export class App extends Component {
         number,
       });
     });
+  };
+
+  onClickDelete = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(item => item.id !== id),
+    }));
   };
 
   onFilter = data => {
@@ -39,6 +40,7 @@ export class App extends Component {
     const filtered = contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
     );
+    console.log(filtered);
     return filtered;
   };
 
@@ -53,7 +55,8 @@ export class App extends Component {
           <ContactList
             filter={this.state.filter}
             contacts={this.state.contacts}
-            filterize={this.filterize()}
+            filterize={this.filterize}
+            onClick={this.onClickDelete}
           />
         </div>
       </Container>
