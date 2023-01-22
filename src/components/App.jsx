@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Container } from './App.styled';
 import ContactForm from './ContactForm/ContactForm';
@@ -16,13 +16,14 @@ export class App extends Component {
   };
 
   formSubmit = ({ name, number }) => {
-    this.setState(prevState => {
-      prevState.contacts.push({
-        name,
-        id: nanoid(),
-        number,
-      });
-    });
+    const newContact = {
+      name,
+      id: nanoid(),
+      number,
+    };
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
   };
 
   onClickDelete = id => {

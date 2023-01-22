@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Form, Button, Input } from './contact-form.styled';
 
 class ContactForm extends Component {

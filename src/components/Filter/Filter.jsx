@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Input } from '../ContactForm/contact-form.styled';
 
 class Filter extends Component {

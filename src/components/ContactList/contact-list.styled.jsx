@@ -8,7 +8,7 @@ export const List = styled.ul`
 
 export const Delete = styled.button`
   display: inline-block;
-  margin-left: 10px;
+  margin-right: auto;
   background-color: burlywood;
   border-radius: 15px;
 `;
