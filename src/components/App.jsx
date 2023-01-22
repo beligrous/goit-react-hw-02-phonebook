@@ -21,9 +21,18 @@ export class App extends Component {
       id: nanoid(),
       number,
     };
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
-    }));
+    const nonEqualArray = this.state.contacts.reduce((acc, item) => {
+      item.name !== newContact.name && acc.push(item);
+      return acc;
+    }, []);
+
+    if (nonEqualArray.length === this.state.contacts.length) {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
+    } else {
+      alert(`${newContact.name} is already in contacts!`);
+    }
   };
 
   onClickDelete = id => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Delete } from './contact-list.styled';
+import { List, Delete, ListItem } from './contact-list.styled';
 
 function ContactList({ filter, contacts, filterize, onClick }) {
   return (
@@ -7,19 +7,19 @@ function ContactList({ filter, contacts, filterize, onClick }) {
       {filter === ''
         ? contacts.map(item => {
             return (
-              <li key={item.id}>
+              <ListItem key={item.id}>
                 <span>
                   {item.name}: {item.number}
                 </span>
                 <Delete onClick={() => onClick(item.id)} type="button">
                   Delete
                 </Delete>
-              </li>
+              </ListItem>
             );
           })
         : filterize().map(item => {
             return (
-              <li key={item.id}>
+              <ListItem key={item.id}>
                 <span>
                   {item.name}:{item.number}
                 </span>
@@ -27,7 +27,7 @@ function ContactList({ filter, contacts, filterize, onClick }) {
                 <Delete onClick={() => onClick(item.id)} type="button">
                   Delete
                 </Delete>
-              </li>
+              </ListItem>
             );
           })}
     </List>
