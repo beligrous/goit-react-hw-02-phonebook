@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 import { Container } from './App.styled';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -45,16 +41,16 @@ export class App extends Component {
     this.setState({ filter: data });
   };
 
-  filterize = () => {
+  findContacts = () => {
     const { filter, contacts } = this.state;
     const filtered = contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
     );
-    console.log(filtered);
     return filtered;
   };
 
   render() {
+    const { filter, contacts } = this.state;
     return (
       <Container>
         <h1>Phonebook</h1>
@@ -63,9 +59,9 @@ export class App extends Component {
           <h2>Contacts</h2>
           <Filter onChange={this.onFilter} />
           <ContactList
-            filter={this.state.filter}
-            contacts={this.state.contacts}
-            filterize={this.filterize}
+            filter={filter}
+            contacts={contacts}
+            findContacts={this.findContacts}
             onClick={this.onClickDelete}
           />
         </div>
@@ -73,3 +69,18 @@ export class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  formSubmit: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.number.isRequired,
+    })
+  ),
+  findContacts: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

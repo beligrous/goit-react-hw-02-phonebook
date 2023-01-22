@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Input } from '../ContactForm/contact-form.styled';
 
 class Filter extends Component {
@@ -12,12 +13,13 @@ class Filter extends Component {
   };
 
   render() {
+    const { filter } = this.state;
     return (
       <label>
-        Find contacts dy name:
+        Find contacts by name:
         <Input
           type="text"
-          value={this.state.filter}
+          value={filter}
           name="filter"
           onChange={this.handleChange}
         />
@@ -27,3 +29,8 @@ class Filter extends Component {
 }
 
 export default Filter;
+
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  handleChange: PropTypes.func,
+};
