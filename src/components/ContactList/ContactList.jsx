@@ -44,9 +44,9 @@ ContactList.propTypes = {
   filter: PropTypes.string.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      numder: PropTypes.number.isRequired,
+      name: PropTypes.string,
+      id: PropTypes.string,
+      numder: PropTypes.number,
     })
   ),
 };

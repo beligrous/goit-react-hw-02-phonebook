@@ -8,7 +8,7 @@ class Filter extends Component {
   };
 
   handleChange = e => {
-    this.setState({ filter: e.currentTarget.value });
+    this.setState({ filter: e.target.value });
     this.props.onChange(this.state.filter);
   };
 
@@ -31,6 +31,6 @@ class Filter extends Component {
 export default Filter;
 
 Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
+  filter: PropTypes.string,
   handleChange: PropTypes.func,
 };

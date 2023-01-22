@@ -71,9 +71,9 @@ export class App extends Component {
 }
 
 App.propTypes = {
-  formSubmit: PropTypes.func.isRequired,
-  onFilter: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+  formSubmit: PropTypes.func,
+  onFilter: PropTypes.func,
+  filter: PropTypes.string,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -81,6 +81,6 @@ App.propTypes = {
       number: PropTypes.number.isRequired,
     })
   ),
-  findContacts: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
+  findContacts: PropTypes.func,
+  onClick: PropTypes.func,
 };
