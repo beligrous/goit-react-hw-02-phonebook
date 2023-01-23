@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import { Container } from './App.styled';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
@@ -18,7 +17,8 @@ export class App extends Component {
       number,
     };
     const nonEqualArray = this.state.contacts.reduce((acc, item) => {
-      item.name !== newContact.name && acc.push(item);
+      item.name.toLowerCase() !== newContact.name.toLowerCase() &&
+        acc.push(item);
       return acc;
     }, []);
 
@@ -69,18 +69,3 @@ export class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  formSubmit: PropTypes.func,
-  onFilter: PropTypes.func,
-  filter: PropTypes.string,
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.number.isRequired,
-    })
-  ),
-  findContacts: PropTypes.func,
-  onClick: PropTypes.func,
-};
