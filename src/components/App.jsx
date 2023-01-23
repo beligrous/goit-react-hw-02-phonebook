@@ -43,9 +43,15 @@ export class App extends Component {
 
   findContacts = () => {
     const { filter, contacts } = this.state;
-    const filtered = contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
+    let filtered;
+    if (filter === '') {
+      filtered = contacts;
+    } else {
+      filtered = contacts.filter(({ name }) =>
+        name.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+
     return filtered;
   };
 
