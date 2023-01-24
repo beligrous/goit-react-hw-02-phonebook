@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Delete, ListItem } from './contact-list.styled';
 
-function ContactList({ findContacts, onClick }) {
+function ContactList({ findContactsArray, onClick }) {
   return (
     <List>
-      {findContacts().map(item => {
+      {findContactsArray.map(item => {
         return (
           <ListItem key={item.id}>
             <span>
@@ -26,5 +26,11 @@ export default ContactList;
 
 ContactList.propTypes = {
   onClick: PropTypes.func.isRequired,
-  findContacts: PropTypes.func.isRequired,
+  findContactsArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    })
+  ),
 };

@@ -41,7 +41,7 @@ export class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  findContacts = () => {
+  findContacts() {
     const { filter, contacts } = this.state;
     let filtered;
     if (filter === '') {
@@ -53,10 +53,11 @@ export class App extends Component {
     }
 
     return filtered;
-  };
+  }
 
   render() {
     const { filter, contacts } = this.state;
+    const findContactsArray = this.findContacts();
     return (
       <Container>
         <h1>Phonebook</h1>
@@ -67,7 +68,7 @@ export class App extends Component {
           <ContactList
             filter={filter}
             contacts={contacts}
-            findContacts={this.findContacts}
+            findContactsArray={findContactsArray}
             onClick={this.onClickDelete}
           />
         </div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Input } from '../ContactForm/contact-form.styled';
 
 function Filter({ filter, onChange }) {
+  console.log(filter);
   return (
     <label>
       Find contacts by name:
